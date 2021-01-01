@@ -9,14 +9,14 @@ from net import *
 from config import Config
 
 generator_optimizer = tf.keras.optimizers.Adam(1e-4, beta_1=0.5, beta_2=0.9)
-discriminator_optimizer = tf.keras.optimizers.Adam(1e-4, beta_1=0.5, beta_2=0.9)
+discriminator_optimizer = tf.keras.optimizers.SGD(learning_rate=1e-4)
 
 FLAGS = Config('./inpaint.yml')
 
-generator = Generator()
+generator = GeneratorMultiColumn()
 discriminator = Discriminator()
 
-test_dataset = tf.data.Dataset.list_files("./TEST/*.jpg")
+test_dataset = tf.data.Dataset.list_files("../TEST/*.jpg")
 test_dataset = test_dataset.map(load_image_train)
 test_dataset = test_dataset.batch(FLAGS.batch_size)
 test_dataset = test_dataset.prefetch(buffer_size = tf.data.experimental.AUTOTUNE)
@@ -27,8 +27,8 @@ checkpoint = tf.train.Checkpoint(step=tf.Variable(0),
                                  discriminator_optimizer=discriminator_optimizer,
                                  generator=generator,
                                  discriminator=discriminator)
-
-checkpoint.restore(checkpoint_dir + '/' + 'ckpt-100')
+manager = tf.train.CheckpointManager(checkpoint, checkpoint_dir, max_to_keep=3)
+checkpoint.restore(checkpoint_dir+'/'+'ckpt-81')
 step = np.int(checkpoint.step)
 print("Continue Training from epoch ", step)
 
