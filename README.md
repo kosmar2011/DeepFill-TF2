@@ -3,7 +3,6 @@ Sketch generation for user guidance missing.
 
 GeneratorMulticolumn() has the same coarse-fine structure as "Free-Form Image Inpainting with Gated Convolution", but with a multi-column coarse stage inspired by "Image Inpainting via Generative Multi-column Convolutional Neural Networks".
 
-![alt text](https://github.com/kosmar2011/ImageInpaintingGatedConv-TF2/blob/master/table.PNG?raw=true)
 
 DIRECTORIES
 
