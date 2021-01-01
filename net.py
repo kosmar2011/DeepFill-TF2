@@ -1,10 +1,16 @@
 import tensorflow as tf
 import numpy as np
 from utils import *
+from config import Config
 import sn
 
+FLAGS = Config('./inpaint.yml')
+img_shape = FLAGS.img_shapes
+IMG_HEIGHT = img_shape[0]
+IMG_WIDTH = img_shape[1]
+
 class gen_conv_block(tf.keras.layers.Layer):
-  def __init__(self, filters, size, stride=1, dilation_rate=1, activation=tf.keras.activations.elu): #tf.keras.activations.swish
+  def __init__(self, filters, size, stride=1, dilation_rate=1, activation=tf.keras.activations.swish):
     super(gen_conv_block, self).__init__(name='')
     self.filters = filters
     self.activation = activation
@@ -141,7 +147,7 @@ class GeneratorMultiColumn(tf.keras.Model):
         offset_flow = None
         ones_x = tf.ones_like(x)[:, :, :, 0:1]
 
-        x_noise = tf.keras.layers.GaussianNoise(stddev=0.4)(x)
+        x_noise = tf.keras.layers.GaussianNoise(stddev=0.1)(x)
         #To ones_x https://github.com/JiahuiYu/generative_inpainting/issues/40
 
         x_w_mask = tf.concat([x_noise, ones_x, ones_x*mask], axis=3)
@@ -169,11 +175,6 @@ class GeneratorMultiColumn(tf.keras.Model):
         x = self.g1_13(x)
         x_b1 = tf.image.resize(x, [xh, xw], method='bilinear')
         #print(x_b1.shape)
-
-        #(32, 128, 128, 128)
-        #(32, 128, 128, 64)
-        #(32, 256, 256, 16)
-        
           #BRANCH 2
         
         x = self.g2_1(x_w_mask)
@@ -271,6 +272,10 @@ class GeneratorMultiColumn(tf.keras.Model):
         #print("x_stage2.shape", x_stage2.shape)
 
         return x_stage1, x_stage2, offset_flow
+    def model(self):
+        x = tf.keras.Input(shape=(IMG_HEIGHT,IMG_WIDTH,3))
+        mask = create_mask(FLAGS)
+        return tf.keras.Model(inputs=[x], outputs=self.call(x,mask))
 
 #GENERATOR NORMAL
 class Generator(tf.keras.Model):
