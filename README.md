@@ -6,7 +6,7 @@ GeneratorMulticolumn() has the same coarse-fine structure as "Free-Form Image In
 
 ![alt text](https://github.com/kosmar2011/ImageInpaintingGatedConv-TF2/blob/master/table.PNG?raw=true)
 
-<font size="10">
+<font size="7">
 DIRECTORIES
 
 ├── ImageInpaintingGatedConv-TF2
