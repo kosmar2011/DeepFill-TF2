@@ -24,8 +24,8 @@ img_shape = FLAGS.img_shapes
 IMG_HEIGHT = img_shape[0]
 IMG_WIDTH = img_shape[1]
 
-training_dirs = "./TRAIN"
-validation_dirs = "./TEST"
+training_dirs = "../TRAIN"
+validation_dirs = "../TEST"
 
 #IMG PRE-PROCESSING
 def load(img):
@@ -46,15 +46,16 @@ def resize_pipeline(img, height, width):
                                 method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
   
 
-generator = Generator()
+generator = GeneratorMultiColumn()
 discriminator = Discriminator()
 
 BUFFER_SIZE = 4000
 
 train_dataset = tf.data.Dataset.list_files(training_dirs+'/*.jpg')
+train_dataset = train_dataset.take(100000)
 train_dataset = train_dataset.map(load_image_train,
                                   num_parallel_calls=tf.data.experimental.AUTOTUNE)
-train_dataset = train_dataset.cache("../../../tmp/CACHED_TRAIN.tmp")
+train_dataset = train_dataset.cache("../../../../tmp/CACHED_TRAIN_MULTI.tmp")
 train_dataset = train_dataset.shuffle(BUFFER_SIZE, reshuffle_each_iteration=True)
 train_dataset = train_dataset.batch(BATCH_SIZE)
 train_dataset = train_dataset.prefetch(buffer_size=tf.data.experimental.AUTOTUNE) 
@@ -85,9 +86,9 @@ def dicriminator_loss(pos, neg):
 #OPTIMIZERS
 #PAPER 1E-4, 0.5, 0.9
 generator_optimizer = tf.keras.optimizers.Adam(1e-4, beta_1=0.5, beta_2=0.9) 
-discriminator_optimizer = tf.keras.optimizers.Adam(1e-4, beta_1=0.5, beta_2=0.9)
+#discriminator_optimizer = tf.keras.optimizers.Adam(1e-4, beta_1=0.5, beta_2=0.9)
 #generator_optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
-#discriminator_optimizer = tf.keras.optimizers.SGD(learning_rate=1e-4)
+discriminator_optimizer = tf.keras.optimizers.SGD(learning_rate=1e-4)
 
 
 #TRAINING
@@ -127,16 +128,15 @@ def train_step(input, mask):
 def fit(train_ds, epochs, test_ds):
     checkpoint.restore(manager.latest_checkpoint)
     if manager.latest_checkpoint:
+        g_total, g_hinge, g_l1, d = [], [], [], []
         print("Restored from {}".format(manager.latest_checkpoint))
         df_load = pd.read_csv(f'./CSV_loss/loss_{int(checkpoint.step)}.csv', delimiter=',')
-        g_total = df_load['g_total'].tolist()
-        g_total = CSV_reader(g_total)
-        g_hinge = df_load['g_hinge'].tolist()
-        g_hinge = CSV_reader(g_hinge)
-        g_l1 = df_load['g_l1'].tolist()
-        g_l1 = CSV_reader(g_l1)
-        d = df_load['d'].tolist()
-        d = CSV_reader(d)
+
+        g_total.extend(CSV_reader(df_load['g_total'].tolist()))
+        g_hinge.extend(CSV_reader(df_load['g_hinge'].tolist()))
+        g_l1.extend(CSV_reader(df_load['g_l1'].tolist()))
+        d.extend(CSV_reader(df_load['d'].tolist()))
+
         print(f"Loaded CSV from step: {int(checkpoint.step)}")
     else:
         print("Initializing from scratch.")
@@ -174,10 +174,10 @@ def fit(train_ds, epochs, test_ds):
 
 
         for input in test_ds.take(1):
-            generate_images(input, num_epoch=check_step)
+            generate_images(input, generator=generator, num_epoch=check_step)
         print("Epoch: ", check_step)
 
-        if check_step % 2 == 0:
+        if check_step % 10 == 0:
             save_path = manager.save()
             print(f"Saved checkpoint for step {check_step}: {save_path}")
 
@@ -191,7 +191,7 @@ checkpoint = tf.train.Checkpoint(step=tf.Variable(0),
                                  discriminator_optimizer=discriminator_optimizer,
                                  generator=generator,
                                  discriminator=discriminator)
-manager = tf.train.CheckpointManager(checkpoint, checkpoint_dir, max_to_keep=3)
+manager = tf.train.CheckpointManager(checkpoint, checkpoint_dir, max_to_keep=5)
 
 checkpoint.restore(manager.latest_checkpoint)
 print("Continue Training from epoch ", np.int(checkpoint.step))
@@ -199,5 +199,5 @@ print("Continue Training from epoch ", np.int(checkpoint.step))
 
 
 #FIT
-EPOCHS = 200 - np.int(checkpoint.step)+1
+EPOCHS = 200 - np.int(checkpoint.step)
 fit(train_dataset, EPOCHS, test_dataset)
