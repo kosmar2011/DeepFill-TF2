@@ -5,28 +5,26 @@ GeneratorMulticolumn() has the same coarse-fine structure as "Free-Form Image In
 
 ![alt text](https://github.com/kosmar2011/ImageInpaintingGatedConv-TF2/blob/master/table.PNG?raw=true)
 
-<font size="4">
 DIRECTORIES
 
-├── ImageInpaintingGatedConv-TF2
+    ├── ImageInpaintingGatedConv-TF2
 
-    ├── config.py
+        ├── config.py
 
-    ├── test_epoch.py
+        ├── test_epoch.py
 
-    ├── training.py
+        ├── training.py
 
-    ├── utils.py
+        ├── utils.py
 
-    ├── sn.py
+        ├── sn.py
 
-    └── net.py
+        └── net.py
 
-├── training_checkpoints
+    ├── training_checkpoints
 
-├── inpaint.yml
+    ├── inpaint.yml
 
-├── TRAIN #Contains training images 
-
-└── TEST  #Contains inference/testing images
-</font>
+    ├── TRAIN #Contains training images 
+    
+    └── TEST  #Contains inference/testing images
