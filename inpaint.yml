@@ -1,47 +1,9 @@
-# =========================== Basic Settings ===========================
-# machine info
-num_gpus_per_job: 1  # number of gpus each job need
-num_cpus_per_job: 1  # number of gpus each job need
-num_hosts_per_job: 1
-memory_per_job: 4  # number of gpus each job need
-gpu_type: 'intel-hd-graphics-4400' #'nvidia-tesla-p100'
-
-# parameters
-name: places2_gated_conv_v100  # any name
-model_restore: ''  # logs/places2_gated_conv
-dataset: 'celeba'  # 'tmnist', 'dtd', 'places2', 'celeba', 'imagenet', 'cityscapes'
-random_crop: False  # Set to false when dataset is 'celebahq', meaning only resize the images to img_shapes, instead of crop img_shapes from a larger raw image. This is useful when you train on images with different resolutions like places2. In these cases, please set random_crop to true.
-val: False  # true if you want to view validation results in tensorboard
-log_dir: logs/full_model_celeba
-
-gan: 'sngan'
-gan_loss_alpha: 1
-gan_with_mask: False #True
-discounted_mask: True
-random_seed: False
-padding: 'SAME'
-
-# training
-train_spe: 4000
-max_iters: 100000000
-viz_max_out: 10
-val_psteps: 2000
-
 static_view_size: 30
 img_shapes: [64, 64, 3] #itan [256, 256, 3] 
 height: 16              #otan allazo to megethos tis eikonas prepei na allazo kai to height kai width    
-width: 16             #giati ayta einai gia tin mask kai prepei na einai arketa mikroteri tis eikonas
+width: 16               #giati ayta einai gia tin mask kai prepei na einai arketa mikroteri tis eikonas
 max_delta_height: 32
 max_delta_width: 32
 batch_size: 32 #itan 16
 vertical_margin: 0
 horizontal_margin: 0
-
-# loss
-ae_loss: True
-l1_loss: True
-l1_loss_alpha: 1.
-
-# to tune
-guided: False
-edge_threshold: 0.6
