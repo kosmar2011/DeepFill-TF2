@@ -27,7 +27,7 @@ It also includes an alternative generator architecture with the name GeneratorMu
 
 * PIL
     
-**Directory Structure**
+## Directory Structure
 
 - DeepFill-TF2/
 
@@ -51,6 +51,6 @@ It also includes an alternative generator architecture with the name GeneratorMu
 
 - TEST/  #Should contain inference/testing images
 
-**Training**
+## Training
 
 Just add the images of the dataset in the Train-Test folders and run  ``python3 DeepFill-TF2/training.py``.
