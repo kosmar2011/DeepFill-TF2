@@ -7,7 +7,7 @@ You don't need the Neural Gym library dependencies to run, so you can update muc
 
 It also includes an alternative generator architecture with the name GeneratorMulticolumn(). It has the same coarse-fine structure as "Free-Form Image Inpainting with Gated Convolution", but with a multi-column coarse stage inspired by "Image Inpainting via Generative Multi-column Convolutional Neural Networks".
 
-**Dependencies**
+##Dependencies##
 
 * Python 3
 
