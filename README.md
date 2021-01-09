@@ -29,7 +29,7 @@ Dependencies
     
 Directory Structure
 
-- ImageInpaintingGatedConv-TF2
+- DeepFill-TF2
 
     - config.py
 
@@ -51,4 +51,4 @@ Directory Structure
 
 - TEST  #Should contain inference/testing images
 
-Just add the images of the dataset in the Train-Test folders and run  ``python3 training.py``.
+Just add the images of the dataset in the Train-Test folders and run  ``python3 DeepFill-TF2/training.py``.
