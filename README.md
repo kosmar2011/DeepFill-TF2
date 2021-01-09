@@ -9,21 +9,21 @@ It also includes an alternative generator architecture with the name GeneratorMu
 
 Dependencies
 
--Tensorflow 2.x
+* Tensorflow 2.x
 
--Numpy 
+* Numpy 
 
--Matplotlib
+* Matplotlib
 
--TQDM
+* TQDM
 
--OpenCV
+* OpenCV
 
--Pandas
+* Pandas
 
--PyYAML
+* PyYAML
 
--PIL
+* PIL
     
 Directory Structure
 
