@@ -27,24 +27,24 @@ Dependencies
     
 Directory Structure
 
-    - ImageInpaintingGatedConv-TF2
+- ImageInpaintingGatedConv-TF2
 
-        -config.py
+    - config.py
 
-        -test_epoch.py
+    - test_epoch.py
 
-        - training.py
+    - training.py
 
-        - utils.py
+    - utils.py
 
-        - sn.py
+    - sn.py
 
-        - net.py
+    - net.py
 
-    - training_checkpoints
+- training_checkpoints
 
-    - inpaint.yml
+- inpaint.yml
 
-    - TRAIN #Should contain training images 
-    
-    - TEST  #Should contain inference/testing images
+- TRAIN #Should contain training images 
+
+- TEST  #Should contain inference/testing images
