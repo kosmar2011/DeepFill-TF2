@@ -7,7 +7,7 @@ You don't need the Neural Gym library dependencies to run, so you can update muc
 
 It also includes an alternative generator architecture with the name GeneratorMulticolumn(). It has the same coarse-fine structure as "Free-Form Image Inpainting with Gated Convolution", but with a multi-column coarse stage inspired by "Image Inpainting via Generative Multi-column Convolutional Neural Networks".
 
-**Dependencies
+**Dependencies**
 
 * Python 3
 
@@ -27,7 +27,7 @@ It also includes an alternative generator architecture with the name GeneratorMu
 
 * PIL
     
-**Directory Structure
+**Directory Structure**
 
 - DeepFill-TF2/
 
@@ -51,6 +51,6 @@ It also includes an alternative generator architecture with the name GeneratorMu
 
 - TEST/  #Should contain inference/testing images
 
-**Training
+**Training**
 
 Just add the images of the dataset in the Train-Test folders and run  ``python3 DeepFill-TF2/training.py``.
