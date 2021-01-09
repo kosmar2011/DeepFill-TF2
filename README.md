@@ -9,6 +9,8 @@ It also includes an alternative generator architecture with the name GeneratorMu
 
 Dependencies
 
+* Python 3
+
 * Tensorflow 2.x
 
 * Numpy 
@@ -48,3 +50,5 @@ Directory Structure
 - TRAIN #Should contain training images 
 
 - TEST  #Should contain inference/testing images
+
+Just add the images of the dataset in the Train-Test folders and run  ``python3 training.py``.
