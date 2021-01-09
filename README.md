@@ -1,7 +1,7 @@
 Tensorflow 2.x implementation of ["Free-Form Image Inpainting with Gated Convolution"](https://github.com/JiahuiYu/generative_inpainting). 
 This repository does not include everything. For example it is missing user guidance. 
 
-You don't need the Neural Gym library dependencies to run, so you can update much easier the code in native Tensorflow 2 eager execution. 
+You don't need the Neural Gym library dependencies to run, so you can update much easier the code in native Tensorflow 2 (eager execution). 
 
 ![DeepFill v2 Architecture](gated_architecture.PNG)
 
