@@ -29,7 +29,7 @@ Dependencies
     
 Directory Structure
 
-- DeepFill-TF2
+- DeepFill-TF2/
 
     - config.py
 
@@ -43,12 +43,12 @@ Directory Structure
 
     - net.py
 
-- training_checkpoints
+- training_checkpoints/
 
 - inpaint.yml
 
-- TRAIN #Should contain training images 
+- TRAIN/ #Should contain training images 
 
-- TEST  #Should contain inference/testing images
+- TEST/  #Should contain inference/testing images
 
 Just add the images of the dataset in the Train-Test folders and run  ``python3 DeepFill-TF2/training.py``.
