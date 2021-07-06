@@ -55,7 +55,7 @@ train_dataset = tf.data.Dataset.list_files(training_dirs+'/*.jpg')
 train_dataset = train_dataset.take(100000)
 train_dataset = train_dataset.map(load_image_train,
                                   num_parallel_calls=tf.data.experimental.AUTOTUNE)
-train_dataset = train_dataset.cache("../../../../tmp/CACHED_TRAIN_MULTI.tmp")
+train_dataset = train_dataset.cache("./CACHED_TRAIN_MULTI.tmp")
 train_dataset = train_dataset.shuffle(BUFFER_SIZE, reshuffle_each_iteration=True)
 train_dataset = train_dataset.batch(BATCH_SIZE)
 train_dataset = train_dataset.prefetch(buffer_size=tf.data.experimental.AUTOTUNE) 
