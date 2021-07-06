@@ -43,6 +43,14 @@ It also includes an alternative generator architecture with the name GeneratorMu
 
     - net.py
 
+    - CSV_loss/
+    
+    - images_loss/
+
+    - images_examples/
+
+    - training_checkpoints/
+
 - training_checkpoints/
 
 - inpaint.yml
@@ -50,6 +58,7 @@ It also includes an alternative generator architecture with the name GeneratorMu
 - TRAIN/ #Should contain training images 
 
 - TEST/  #Should contain inference/testing images
+
 
 ## Training
 
