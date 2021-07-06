@@ -7,3 +7,4 @@ max_delta_width: 32
 batch_size: 32 #itan 16
 vertical_margin: 0
 horizontal_margin: 0
+gan_with_mask: False
